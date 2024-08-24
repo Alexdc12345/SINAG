@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sinag/Screens/Home.dart';
 import 'package:sinag/Screens/Tester.dart';
-import 'package:sinag/Screens/line_chart_test';
+import 'package:sinag/Screens/charttest.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LineChartSample()
+      home: HomePage()
 
     );
   }

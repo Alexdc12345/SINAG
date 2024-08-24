@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -135,6 +136,16 @@ class HomePage extends StatelessWidget {
                 )
               ],
             ),
+          ),
+          const SizedBox(height: 25),
+          LineChart(
+            LineChartData(
+              gridData: const FlGridData(show: true), // Removed const from here
+              titlesData: const FlTitlesData(show: true),
+              borderData: FlBorderData(show: true),
+
+            )
+
           ),
         ],
       ),

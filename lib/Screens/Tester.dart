@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show Alignment, BuildContext, Canvas, Center, CircleAvatar, Color, Colors, Column, CustomPaint, CustomPainter, FontWeight, Icon, Icons, MaterialApp, Offset, Paint, Positioned, Scaffold, Size, SizedBox, Stack, StatelessWidget, Text, TextAlign, TextStyle, Widget;
 
 
 class Tester extends StatelessWidget {
@@ -19,7 +19,7 @@ class Tester extends StatelessWidget {
                 left: 70,
                 right: 70,
                 child: CustomPaint(
-                  size: Size(300, 100),
+                  size: const Size(300, 100),
                   painter: LinePainter(),
                 ),
               ),
