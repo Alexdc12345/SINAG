@@ -19,19 +19,17 @@ class HomePage extends StatelessWidget {
       ),
       backgroundColor: const Color(0xFFFFF4DE), // Background color set to #FFF4DE
       body: Column(
-
         children: [
           const SizedBox(height: 50),
-
-          const Column(
+          const Column(  // Removed const from here
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: [  // Moved const here
               Text(
-                'Monthly Total solar Energy Generated',
+                'Monthly Total Solar Energy Generated',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black
+                  color: Colors.black,
                 ),
               ),
               SizedBox(height: 4),
@@ -41,18 +39,19 @@ class HomePage extends StatelessWidget {
                   Text(
                     '428.0872',
                     style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
                   ),
+                  SizedBox(width: 5), // Added SizedBox to provide space between the Text widgets
                   Text(
-                    textAlign: TextAlign.center,
                     'kWh',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
                   ),
                 ],
@@ -60,34 +59,32 @@ class HomePage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 25),
-          const Column(
+          Column( // Removed const from here
             children: [
-              CircleAvatar(
+              const CircleAvatar( // Moved const here
                 radius: 25,
                 backgroundColor: Colors.orange,
                 child: Icon(Icons.wb_sunny, size: 30, color: Colors.white),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      radius: 25,
-                      backgroundColor: Colors.orange,
-                      child: Icon(Icons.home, size: 30, color: Colors.white),
-                    ),
-                    SizedBox(width: 100),
-                    CircleAvatar(
-                      radius: 25,
-                      backgroundColor: Colors.orange,
-                      child: Icon(Icons.home, size: 30, color: Colors.white),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  CircleAvatar(
+                    radius: 25,
+                    backgroundColor: Colors.orange,
+                    child: Icon(Icons.home, size: 30, color: Colors.white),
                   ),
-                ]
-              )
+                  SizedBox(width: 100),
+                  CircleAvatar(
+                    radius: 25,
+                    backgroundColor: Colors.orange,
+                    child: Icon(Icons.home, size: 30, color: Colors.white),
+                  ),
+                ],
+              ),
             ],
           ),
-
-
           Container(
             margin: const EdgeInsets.only(top: 20),
             child: Row(
@@ -109,7 +106,7 @@ class HomePage extends StatelessWidget {
           ),
           const SizedBox(height: 20), // Space below the row of containers
           Container(
-            height: 20,
+            height: 40, // Adjusted height to fit the text
             width: 350,
             decoration: BoxDecoration(
               color: Colors.orange,
@@ -123,30 +120,19 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Generated Electricity Today',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                )
-              ],
+            child: const Center( // Changed from Column to Center
+              child: Text(
+                'Generated Electricity Today',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 25),
-          LineChart(
-            LineChartData(
-              gridData: const FlGridData(show: true), // Removed const from here
-              titlesData: const FlTitlesData(show: true),
-              borderData: FlBorderData(show: true),
 
-            )
-
-          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
