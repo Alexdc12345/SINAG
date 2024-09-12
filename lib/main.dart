@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sinag/Screens/Home.dart';
-import 'package:sinag/Screens/Tester.dart';
-import 'package:sinag/Screens/charttest.dart';
 
 void main() {
   runApp(const MyApp());

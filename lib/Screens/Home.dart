@@ -21,9 +21,9 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           const SizedBox(height: 50),
-          const Column(  // Removed const from here
+          const Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [  // Moved const here
+            children: [
               Text(
                 'Monthly Total Solar Energy Generated',
                 style: TextStyle(
@@ -59,26 +59,26 @@ class HomePage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 25),
-          Column( // Removed const from here
+          const Column(
             children: [
-              const CircleAvatar( // Moved const here
+              CircleAvatar(
                 radius: 25,
-                backgroundColor: Colors.orange,
+                backgroundColor: Color(0xFFFFC107), // Changed from orange to #FFC107
                 child: Icon(Icons.wb_sunny, size: 30, color: Colors.white),
               ),
-              const SizedBox(height: 4),
+              SizedBox(height: 4),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   CircleAvatar(
                     radius: 25,
-                    backgroundColor: Colors.orange,
+                    backgroundColor: Color(0xFFFFC107), // Changed from orange to #FFC107
                     child: Icon(Icons.home, size: 30, color: Colors.white),
                   ),
                   SizedBox(width: 100),
                   CircleAvatar(
                     radius: 25,
-                    backgroundColor: Colors.orange,
+                    backgroundColor: Color(0xFFFFC107), // Changed from orange to #FFC107
                     child: Icon(Icons.home, size: 30, color: Colors.white),
                   ),
                 ],
@@ -107,9 +107,9 @@ class HomePage extends StatelessWidget {
           const SizedBox(height: 20), // Space below the row of containers
           Container(
             height: 40, // Adjusted height to fit the text
-            width: 350,
+            width: 365,
             decoration: BoxDecoration(
-              color: Colors.orange,
+              color: const Color(0xFFFFC107), // Changed from orange to #FFC107
               borderRadius: BorderRadius.circular(5.0),
               boxShadow: [
                 BoxShadow(
@@ -120,7 +120,7 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            child: const Center( // Changed from Column to Center
+            child: const Center(
               child: Text(
                 'Generated Electricity Today',
                 style: TextStyle(
@@ -132,7 +132,6 @@ class HomePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 25),
-
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -155,11 +154,14 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildStatusContainer(String label, String value, double progress) {
+    // Set color based on progress value
+    Color progressColor = progress == 0 ? const Color(0xFFD0AD67) : const Color(0xFFF57C00);
+
     return Container(
       width: 80,
       height: 80,
       decoration: BoxDecoration(
-        color: Colors.orange,
+        color: const Color(0xFFFFC107),
         borderRadius: BorderRadius.circular(5.0),
         boxShadow: [
           BoxShadow(
@@ -176,8 +178,8 @@ class HomePage extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(
-              fontSize: 12,
+            style: TextStyle(
+              fontSize: label == 'TEMPERATURE' ? 9.5 : 12, // Decrease font size for "TEMPERATURE"
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
@@ -205,7 +207,7 @@ class HomePage extends StatelessWidget {
               widthFactor: progress, // Adjust this value to set progress level
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.orange[900], // Color of the filled part
+                  color: progressColor, // Color of the filled part based on progress
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
