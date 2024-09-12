@@ -39,7 +39,7 @@ Before you begin, ensure you have the following installed:
 
 <br>
 
-**3. Install Dependencies.**
+**3. Install dependencies.**
 
    Run this command in your terminal: 
    ```
@@ -48,7 +48,7 @@ Before you begin, ensure you have the following installed:
 
 <br>
 
-**4. Install Dependencies.**
+**4. Run the app.**
 
    Run this command in your terminal: 
    ```
