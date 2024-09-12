@@ -4,7 +4,7 @@
 
 ### 🧐 I. Overview
 
-This is a project for a hackathon called **Xinyx Unlocked 2024**
+This is a project for a hackathon called **Xinyx Unlocked 2024**.
 <br><br>
 ##
 
@@ -35,6 +35,24 @@ Before you begin, ensure you have the following installed:
    Run this command in your terminal: 
    ```
    cd SINAG
+   ```
+
+<br>
+
+**3. Install Dependencies.**
+
+   Run this command in your terminal: 
+   ```
+   flutter pub get
+   ```
+
+<br>
+
+**4. Install Dependencies.**
+
+   Run this command in your terminal: 
+   ```
+   flutter run
    ```
 
 <br>
