@@ -1,16 +1,15 @@
-# sinag
+<div align="center">
+  <h1>Sinag</h1>
+</div>
 
-SINAG App
+### 🧐 I. Overview
 
-## Getting Started
+This is a project for a hackathon called **Xinyx Unlocked 2024**
 
-This project is a starting point for a Flutter application.
+### 📋 II. Prerequisites
 
-A few resources to get you started if this is your first Flutter project:
+Before you begin, ensure you have the following installed:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Flutter](https://flutter.dev/docs/get-started/install) (version 3.24.2 or higher)
+- [Dart SDK](https://dart.dev/get-dart) (compatible with the Flutter version)
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
