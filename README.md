@@ -26,7 +26,6 @@ Before you begin, ensure you have the following installed:
    ```
    git clone https://github.com/Alexdc12345/SINAG.git
    ```
-(Optional: You can also ```Fork``` this repository before cloning.)
 
 <br>
 
