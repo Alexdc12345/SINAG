@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:sinag/Screens/Recommendation.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,38 +17,58 @@ class _HomePageState extends State<HomePage> {
   double? current;
   double? energy;
   double? temperature;
+  double? total_solar_energy;
+  String _location = 'Fetching location...';
 
   @override
   void initState() {
     super.initState();
     _fetchData();
+    _getCurrentLocation();
   }
 
   Future<void> _fetchData() async {
     try {
       final data = await _mockFetchDataFromDatabase();
-      print('Fetched data: $data'); // Debug print
+      print('Fetched data: $data');
       setState(() {
         voltage = data['voltage'];
         current = data['current'];
         energy = data['energy'];
         temperature = data['temperature'];
+        total_solar_energy = data['total_solar_energy']; 
       });
     } catch (e) {
       print('Error fetching data: $e');
     }
   }
 
-  // Database simulation
+  // Simulate database 
   Future<Map<String, dynamic>> _mockFetchDataFromDatabase() async {
     await Future.delayed(Duration(seconds: 2));
     return {
-      // Example values for testing
-      'voltage': 47.2, 
+      'voltage': 100.2,
       'current': 3.5,
-      'energy': 40.0,
+      'energy': 70.0,
       'temperature': 22.0,
+      'total_solar_energy': 428.087,
     };
+  }
+
+  Future<void> _getCurrentLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+      setState(() {
+        _location = '${position.latitude.toStringAsFixed(4)}° N, ${position.longitude.toStringAsFixed(4)}° E';
+      });
+    } catch (e) {
+      setState(() {
+        _location = 'Error fetching location';
+      });
+      print('Error fetching location: $e');
+    }
   }
 
   void _onItemTapped(int index) {
@@ -53,28 +76,127 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _selectedIndex = index;
       });
+
+      switch (index) 
+      {
+        case 0:
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()), // Navigate back to home page
+          );
+        break;
+
+        case 1:
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => RecommendationPage()), // Navigate to recommendation system
+          );
+        break;
+
+        case 2:
+        break;
+
+      }
     }
+  }
+
+  void _onButtonPressed() {
+    print('Home button pressed!');
+  }
+    void _onNotificationButtonPressed() {
+    print('Notification button pressed!');
+  }
+
+  void _onMenuButtonPressed() {
+    print('Hamburger menu button pressed!');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+    appBar: AppBar(
         backgroundColor: const Color(0xFFFFF4DE),
-        title: const Text(
-          'Logo Placeholder',
-          style: TextStyle(
-            color: Colors.black,
-          ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Current Location:',
+              style: TextStyle(
+                color: Color.fromARGB(255, 124, 123, 123),
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              _location,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 12,
+              ),
+            ),
+          ],
         ),
         centerTitle: true,
+                leading: Padding(
+          padding: const EdgeInsets.only(left: 16.0),
+          child: GestureDetector(
+            onTap: _onMenuButtonPressed,
+            child: Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFFFFC107),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.3),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Icon(Icons.menu, color: Colors.white),
+              ),
+            ),
+          ),
+        ),
+        actions: [
+          // Add a yellow circle button with a notification icon
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: GestureDetector(
+              onTap: _onNotificationButtonPressed,
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color(0xFFFFC107),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: Icon(Icons.notifications, color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       backgroundColor: const Color(0xFFFFF4DE),
       body: SingleChildScrollView(
         child: Column(
           children: [
             const SizedBox(height: 50),
-            const Column(
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
@@ -90,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '428.0872',
+                      '${total_solar_energy?.toStringAsFixed(4) ?? '0.0000'}',
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
@@ -143,16 +265,12 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Display voltage with a maximum value of 240 volts
                   _buildStatusContainer('VOLTAGE', voltage, 'V', 240.0),
                   const SizedBox(width: 15),
-                  // Display current with a maximum value of 100 amps
                   _buildStatusContainer('CURRENT', current, 'A', 100.0),
                   const SizedBox(width: 15),
-                  // Display energy with a maximum value of 1000 kWh
                   _buildStatusContainer('ENERGY', energy, 'kWh', 1000.0),
                   const SizedBox(width: 15),
-                  // Display temperature with a maximum value of 100°C
                   _buildStatusContainer('TEMPERATURE', temperature, '°C', 100.0),
                 ],
               ),
@@ -184,38 +302,72 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            const SizedBox(height: 20), // Add some spacing between the boxes
+            Container(
+              height: 250, // Placeholder height, adjust as needed
+              width: 365, // Placeholder width, adjust as needed
+              decoration: BoxDecoration(
+                color: Colors.grey[300], // Placeholder color
+                borderRadius: BorderRadius.circular(5.0),
+                border: Border.all(color: Colors.grey), // Optional border
+              ),
+              child: const Center(
+                child: Text(
+                  'Placeholder Box for Graph',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xFFFFECB3),
-        unselectedItemColor: const Color(0xFF00796B),
-        selectedItemColor: const Color(0xFF00796B),
-        selectedLabelStyle: const TextStyle(
-          color: Color(0xFF00796B),
-        ),
-        unselectedLabelStyle: const TextStyle(
-          color: Color(0xFF00796B),
-        ),
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: [
-          BottomNavigationBarItem(
-            icon: _buildNavIcon(Icons.home, 0),
-            label: 'Home',
+      
+      bottomNavigationBar: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            height: 61,
+            color: const Color(0xFFFFECB3),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildNavItem(Icons.home, 'Home', 0),
+                _buildNavItem(Icons.lightbulb_sharp, 'Recommendation', 1),
+                SizedBox(width: 50),
+                _buildNavItem(Icons.shopping_cart, 'Marketplace', 2),
+                _buildNavItem(Icons.person, 'Profile', 3),
+              ],
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: _buildNavIcon(Icons.history, 1),
-            label: 'History',
-          ),
-          BottomNavigationBarItem(
-            icon: _buildNavIcon(Icons.monetization_on, 2),
-            label: 'Earnings',
-          ),
-          BottomNavigationBarItem(
-            icon: _buildNavIcon(Icons.person, 3),
-            label: 'Profile',
+          Positioned(
+            bottom: 22,
+            left: MediaQuery.of(context).size.width / 2 - 37.5,
+            child: InkWell(
+              onTap: _onButtonPressed,
+              borderRadius: BorderRadius.circular(30),
+              child: Container(
+                width: 75,
+                height: 75,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color(0xFFFFC107),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: Image.asset('assets/sun_icon.png', width: 45, height: 45),
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -223,10 +375,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildStatusContainer(String label, double? value, String unit, double maxValue) {
-    String displayValue = value != null ? value.toStringAsFixed(2) : '0.00';
-    
-    double progressValue = (value ?? 0.0) / maxValue;
-    
+    double displayValue = value ?? 0.0;
+    double progressValue = (displayValue / maxValue).clamp(0.0, 1.0);
+
     return Container(
       width: 80,
       height: 80,
@@ -256,8 +407,8 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(height: 4),
           Text(
-            '$displayValue $unit',
-            style: const TextStyle(
+            '${displayValue.toStringAsFixed(2)} $unit',
+            style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.bold,
               color: Colors.black,
@@ -268,20 +419,18 @@ class _HomePageState extends State<HomePage> {
             width: 60,
             height: 5,
             decoration: BoxDecoration(
-              color: Colors.grey[300],
-              borderRadius: BorderRadius.circular(8.0),
+              color: Color(0xFFD0AD67),
+              borderRadius: BorderRadius.circular(5.0),
             ),
-            child: Stack(
-              children: [
-                Container(
-                  width: 60 * progressValue,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
+            child: FractionallySizedBox(
+              alignment: Alignment.centerLeft,
+              widthFactor: progressValue,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0xFFF57C00),
+                  borderRadius: BorderRadius.circular(5.0),
                 ),
-              ],
+              ),
             ),
           ),
         ],
@@ -289,13 +438,19 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildNavIcon(IconData icon, int index) {
-    bool isSelected = _selectedIndex == index;
-
-    return Icon(
-      icon,
-      color: isSelected ? const Color(0xFFFFC107) : const Color(0xFF00796B),
-      size: isSelected ? 30 : 24,
+  Widget _buildNavItem(IconData icon, String label, int index) {
+    return GestureDetector(
+      onTap: () => _onItemTapped(index),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            color: _selectedIndex == index ? Color(0xFFFFC107) : Color(0xFF00796B),
+            size: 35,
+          ),
+        ],
+      ),
     );
   }
 }
