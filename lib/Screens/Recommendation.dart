@@ -505,6 +505,36 @@ class _RecommendationPageState extends State<RecommendationPage> {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(top: 15.0), // Adjust the value as needed
+            child: Container(
+              height: 40,
+              width: 365,
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFC107),
+                borderRadius: BorderRadius.circular(5.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Text(
+                  'Recommended Solar PV System',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ),          
           Expanded(
             child: Center(
               child: Container(
