@@ -18,8 +18,21 @@ class _RecommendationPageState extends State<RecommendationPage> {
   double? temperature;
   String _location = 'Fetching location...';
 
+  String moduleSpecsPlaceholder = 'Fetching specs...';
+  String inverterSpecsPlaceholder = 'Fetching specs...';
+  String sinagMeterSpecsPlaceholder = 'Fetching specs...';  
+
   final TextEditingController _house1Controller = TextEditingController(text: 'House 1');
   final TextEditingController _house2Controller = TextEditingController(text: 'House 2');
+
+  final TextEditingController _module = TextEditingController(text: 'Module');
+  final TextEditingController _inverter = TextEditingController(text: 'Inverter');
+  final TextEditingController _sinagMeter = TextEditingController(text: 'SINAG Meter');
+
+  final TextEditingController _moduleSpecs = TextEditingController();
+  final TextEditingController _inverterSpecs = TextEditingController();
+  final TextEditingController _sinagMeterSpecs = TextEditingController();
+
   String _selectedDropdownValue = '3k-5k kWh'; // Default dropdown value
   final List<String> _dropdownItems = ['3k-5k kWh', '5k-7k kWh', '7k-9k kWh', '9k-11k kWh'];
   String _selectedDropdownValue1 = 'NCR'; // Default dropdown value
@@ -28,6 +41,10 @@ class _RecommendationPageState extends State<RecommendationPage> {
   @override
   void initState() {
     super.initState();
+      // Set initial placeholder text
+    _moduleSpecs.text = moduleSpecsPlaceholder;
+    _inverterSpecs.text = inverterSpecsPlaceholder;
+    _sinagMeterSpecs.text = sinagMeterSpecsPlaceholder;
     _fetchData();
     _getCurrentLocation();
   }
@@ -41,6 +58,10 @@ class _RecommendationPageState extends State<RecommendationPage> {
         current = data['current'];
         energy = data['energy'];
         temperature = data['temperature'];
+
+        _moduleSpecs.text = data['moduleSpecsPlaceholder'];
+        _inverterSpecs.text = data['inverterSpecsPlaceholder'];
+        _sinagMeterSpecs.text = data['sinagMeterSpecsPlaceholder'];
       });
     } catch (e) {
       print('Error fetching data: $e');
@@ -54,6 +75,9 @@ class _RecommendationPageState extends State<RecommendationPage> {
       'current': 3.5,
       'energy': 70.0,
       'temperature': 22.0,
+      'moduleSpecsPlaceholder': 'SunPower Maxeon 5 AC',
+      'inverterSpecsPlaceholder': 'SMA Sunny Boy 5.0',
+      'sinagMeterSpecsPlaceholder': 'Eastron SDM630-Modbus',
     };
   }
 
@@ -273,6 +297,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 13,
+                            fontWeight: FontWeight.bold,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -307,6 +332,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 13,
+                            fontWeight: FontWeight.bold,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -534,7 +560,244 @@ class _RecommendationPageState extends State<RecommendationPage> {
                 ),
               ),
             ),
-          ),          
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0), // Adjust the value as needed
+            child: Container(
+              height: 130,
+              width: 365,
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFECB3),
+                borderRadius: BorderRadius.circular(5.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Stack(
+                children: [
+                  // House 1 and House 2 TextFields
+                  Positioned(
+                    top: 10,
+                    left: 10,
+                    child: Container(
+                      height: 30,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFFC107),
+                        borderRadius: BorderRadius.circular(5.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 5,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: TextField(
+                          controller: _module,
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(vertical: 13.5), // Adjusted vertical padding
+                          ),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 50,
+                    left: 10,
+                    child: Container(
+                      height: 30,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFFC107),
+                        borderRadius: BorderRadius.circular(5.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 5,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: TextField(
+                          controller: _inverter,
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(vertical: 13.5), // Adjusted vertical padding
+                          ),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),                  
+                  Positioned(
+                    top: 90,
+                    left: 10,
+                    child: Container(
+                      height: 30,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFFC107),
+                        borderRadius: BorderRadius.circular(5.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 5,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: TextField(
+                          controller: _sinagMeter,
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(vertical: 13.5), // Adjusted vertical padding
+                          ),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 10,
+                    left: 130,
+                    child: Container(
+                      height: 30,
+                      width: 225,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFFC107),
+                        borderRadius: BorderRadius.circular(5.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 5,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: TextField(
+                          controller: _moduleSpecs,
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(vertical: 13.5), // Adjusted vertical padding
+                          ),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 13,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 50,
+                    left: 130,
+                    child: Container(
+                      height: 30,
+                      width: 225,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFFC107),
+                        borderRadius: BorderRadius.circular(5.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 5,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: TextField(
+                          controller: _inverterSpecs,
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(vertical: 13.5), // Adjusted vertical padding
+                          ),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 13,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 90,
+                    left: 130,
+                    child: Container(
+                      height: 30,
+                      width: 225,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFFC107),
+                        borderRadius: BorderRadius.circular(5.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 5,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: TextField(
+                          controller: _sinagMeterSpecs,
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(vertical: 13.5), // Adjusted vertical padding
+                          ),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 13,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),                                                                                         
+                ],
+              ),
+            ),
+          ),                    
           Expanded(
             child: Center(
               child: Container(
