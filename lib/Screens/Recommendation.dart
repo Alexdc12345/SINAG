@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:sinag/Screens/Home.dart';
+import 'package:sinag/Screens/Notifications.dart';
+import 'package:sinag/Screens/Chatbot.dart';
 
 class RecommendationPage extends StatefulWidget {
   const RecommendationPage({super.key});
@@ -107,14 +109,14 @@ class _RecommendationPageState extends State<RecommendationPage> {
         case 0:
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => RecommendationPage()), // Navigate back to recommendation system
+            MaterialPageRoute(builder: (context) => const RecommendationPage()), // Navigate back to recommendation system
           );
           break;
 
         case 1:
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => HomePage()), // Navigate to home page
+            MaterialPageRoute(builder: (context) => const HomePage()), // Navigate to home page
           );
           break;
 
@@ -129,12 +131,24 @@ class _RecommendationPageState extends State<RecommendationPage> {
     print('Home button pressed!');
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => HomePage()),
+      MaterialPageRoute(builder: (context) => const HomePage()),
+    );
+  }
+
+  void _onChatbotButtonPressed() {
+    print("Chatbot button pressed"); // Debugging line
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const ChatbotPage()),
     );
   }
 
   void _onNotificationButtonPressed() {
     print('Notification button pressed!');
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const NotificationsPage()),
+    );        
   }
 
   void _onMenuButtonPressed() {
@@ -152,7 +166,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Current Location:',
                   style: TextStyle(
                     color: Color.fromARGB(255, 124, 123, 123),
@@ -162,7 +176,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                 ),
                 Text(
                   _location,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 12,
                   ),
@@ -240,7 +254,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                   ),
                 ],
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Find the right Solar PV System for your home!',
                   style: TextStyle(
@@ -294,11 +308,11 @@ class _RecommendationPageState extends State<RecommendationPage> {
                       child: Center(
                         child: TextField(
                           controller: _house1Controller,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.symmetric(vertical: 13.5), // Adjusted vertical padding
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
@@ -329,11 +343,11 @@ class _RecommendationPageState extends State<RecommendationPage> {
                       child: Center(
                         child: TextField(
                           controller: _house2Controller,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.symmetric(vertical: 13.5), // Adjusted vertical padding
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
@@ -377,7 +391,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                   padding: const EdgeInsets.symmetric(horizontal: 8.0), // Adjusted padding
                                   child: Text(
                                     value,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 13,
                                     ),
@@ -424,7 +438,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                   padding: const EdgeInsets.symmetric(horizontal: 8.0), // Adjusted padding
                                   child: Text(
                                     value,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 13,
                                     ),
@@ -471,7 +485,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                   padding: const EdgeInsets.symmetric(horizontal: 8.0), // Adjusted padding
                                   child: Text(
                                     value,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 13,
                                     ),
@@ -518,7 +532,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                   padding: const EdgeInsets.symmetric(horizontal: 8.0), // Adjusted padding
                                   child: Text(
                                     value,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 13,
                                     ),
@@ -552,7 +566,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                   ),
                 ],
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Recommended Solar PV System',
                   style: TextStyle(
@@ -607,11 +621,11 @@ class _RecommendationPageState extends State<RecommendationPage> {
                         child: TextField(
                           controller: _module,
                           readOnly: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.symmetric(vertical: 13.5), // Adjusted vertical padding
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
@@ -643,11 +657,11 @@ class _RecommendationPageState extends State<RecommendationPage> {
                         child: TextField(
                           controller: _inverter,
                           readOnly: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.symmetric(vertical: 13.5), // Adjusted vertical padding
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
@@ -679,11 +693,11 @@ class _RecommendationPageState extends State<RecommendationPage> {
                         child: TextField(
                           controller: _sinagMeter,
                           readOnly: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.symmetric(vertical: 13.5), // Adjusted vertical padding
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
@@ -715,11 +729,11 @@ class _RecommendationPageState extends State<RecommendationPage> {
                         child: TextField(
                           controller: _moduleSpecs,
                           readOnly: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.symmetric(vertical: 13.5), // Adjusted vertical padding
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 13,
                           ),
@@ -750,11 +764,11 @@ class _RecommendationPageState extends State<RecommendationPage> {
                         child: TextField(
                           controller: _inverterSpecs,
                           readOnly: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.symmetric(vertical: 13.5), // Adjusted vertical padding
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 13,
                           ),
@@ -785,11 +799,11 @@ class _RecommendationPageState extends State<RecommendationPage> {
                         child: TextField(
                           controller: _sinagMeterSpecs,
                           readOnly: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.symmetric(vertical: 13.5), // Adjusted vertical padding
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 13,
                           ),
@@ -819,7 +833,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                     ),
                   ],
                 ),
-                child: Center(
+                child: const Center(
                   child: Text(
                     'Return of Investment (ROI)',
                     style: TextStyle(
@@ -879,7 +893,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
               children: [
                 _buildNavItem(Icons.home, 'Home', 1),
                 _buildNavItem(Icons.lightbulb_sharp, 'Recommendation', 0),
-                SizedBox(width: 50),
+                const SizedBox(width: 50),
                 _buildNavItem(Icons.shopping_cart, 'Marketplace', 2),
                 _buildNavItem(Icons.person, 'Profile', 3),
               ],
@@ -887,27 +901,27 @@ class _RecommendationPageState extends State<RecommendationPage> {
           ),
           Positioned(
             bottom: 22,
-            left: MediaQuery.of(context).size.width / 2 - 37.5,
+            left: MediaQuery.of(context).size.width / 2 - 35,
             child: InkWell(
-              onTap: _onButtonPressed,
+              onTap: _onChatbotButtonPressed,
               borderRadius: BorderRadius.circular(30),
               child: Container(
-                width: 75,
-                height: 75,
+                width: 70,
+                height: 70,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color(0xFFFFC107),
+                  color: const Color(0xFFFFC107),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.3),
                       spreadRadius: 2,
                       blurRadius: 5,
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
                 child: Center(
-                  child: Image.asset('assets/sun_icon.png', width: 45, height: 45),
+                  child: Image.asset('assets/sun_icon.png', width: 44, height: 44),
                 ),
               ),
             ),
@@ -924,7 +938,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
         children: [
           Icon(
             icon,
-            color: _selectedIndex == index ? Color(0xFFFFC107) : Color(0xFF00796B),
+            color: _selectedIndex == index ? const Color(0xFFFFC107) : const Color(0xFF00796B),
             size: 35,
           ),
         ],

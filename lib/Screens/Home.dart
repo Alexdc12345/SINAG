@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
 
   // Simulate database 
   Future<Map<String, dynamic>> _mockFetchDataFromDatabase() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     return {
       'voltage': 100.2,
       'current': 3.5,
@@ -84,14 +84,14 @@ class _HomePageState extends State<HomePage> {
         case 0:
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => HomePage()), // Navigate back to home page
+            MaterialPageRoute(builder: (context) => const HomePage()), // Navigate back to home page
           );
         break;
 
         case 1:
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => RecommendationPage()), // Navigate to recommendation system
+            MaterialPageRoute(builder: (context) => const RecommendationPage()), // Navigate to recommendation system
           );
         break;
 
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
     print("Chatbot button pressed"); // Debugging line
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ChatbotPage()),
+      MaterialPageRoute(builder: (context) => const ChatbotPage()),
     );
   }
 
@@ -122,12 +122,12 @@ class _HomePageState extends State<HomePage> {
     print('Notification button pressed!');
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => NotificationsPage()),
+      MaterialPageRoute(builder: (context) => const NotificationsPage()),
     );    
   }
 
   void _onMenuButtonPressed() {
-    print('Hamburger menu button pressed!');
+    print('Hamburger menu button pressed!');   
   }
 
   void _showHelpDialog(BuildContext context) {
@@ -135,11 +135,11 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Help'),
-          content: Text('Having trouble? Ask SINAGbot!'),
+          title: const Text('Help'),
+          content: const Text('Having trouble? Ask SINAGbot!'),
           actions: [
             TextButton(
-              child: Text('OK'),
+              child: const Text('OK'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Current Location:',
               style: TextStyle(
                 color: Color.fromARGB(255, 124, 123, 123),
@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Text(
               _location,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 12,
               ),
@@ -185,17 +185,17 @@ class _HomePageState extends State<HomePage> {
               height: 40,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Color(0xFFFFC107),
+                color: const Color(0xFFFFC107),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.3),
                     spreadRadius: 2,
                     blurRadius: 5,
-                    offset: Offset(0, 2),
+                    offset: const Offset(0, 2),
                   ),
                 ],
               ),
-              child: Center(
+              child: const Center(
                 child: Icon(Icons.menu, color: Colors.white),
               ),
             ),
@@ -212,17 +212,17 @@ class _HomePageState extends State<HomePage> {
                 height: 40,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color(0xFFFFC107),
+                  color: const Color(0xFFFFC107),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.3),
                       spreadRadius: 2,
                       blurRadius: 5,
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
-                child: Center(
+                child: const Center(
                   child: Icon(Icons.notifications, color: Colors.white),
                 ),
               ),
@@ -238,7 +238,7 @@ class _HomePageState extends State<HomePage> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Monthly Total Solar Energy Generated',
                   style: TextStyle(
                     fontSize: 16,
@@ -246,20 +246,20 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       '${total_solar_energy?.toStringAsFixed(4) ?? '0.0000'}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(width: 5),
-                    Text(
+                    const SizedBox(width: 5),
+                    const Text(
                       'kWh',
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -375,62 +375,35 @@ class _HomePageState extends State<HomePage> {
               children: [
                 _buildNavItem(Icons.home, 'Home', 0),
                 _buildNavItem(Icons.lightbulb_sharp, 'Recommendation', 1),
-                SizedBox(width: 50),
+                const SizedBox(width: 50),
                 _buildNavItem(Icons.shopping_cart, 'Marketplace', 2),
                 _buildNavItem(Icons.person, 'Profile', 3),
               ],
             ),
           ),          
           Positioned(
-            bottom: 22,
-            left: MediaQuery.of(context).size.width / 2 - 37.5,
+            bottom: 24,
+            left: MediaQuery.of(context).size.width / 2 - 35,
             child: InkWell(
-              onTap: _onButtonPressed,
+              onTap: _onChatbotButtonPressed,
               borderRadius: BorderRadius.circular(30),
               child: Container(
-                width: 75,
-                height: 75,
+                width: 70,
+                height: 70,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color.fromARGB(255, 255, 193, 7), // Adjusted transparency
+                  color: const Color.fromARGB(255, 255, 193, 7), // Adjusted transparency
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.3),
                       spreadRadius: 2,
                       blurRadius: 5,
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
                 child: Center(
-                  child: Image.asset('assets/sun_icon.png', width: 45, height: 45),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 85,
-            right: 25,
-            child: InkWell(
-              onTap: _onChatbotButtonPressed,
-              borderRadius: BorderRadius.circular(30),
-              child: Container(
-                width: 65,
-                height: 65,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Color.fromARGB(72, 255, 193, 7), // Adjusted transparency
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Center(
-                  child: Image.asset('assets/palm.png', width: 40, height: 40), // Replace with your image
+                  child: Image.asset('assets/sun_icon.png', width: 44, height: 44),
                 ),
               ),
             ),
@@ -474,7 +447,7 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(height: 4),
           Text(
             '${displayValue.toStringAsFixed(2)} $unit',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.bold,
               color: Colors.black,
@@ -485,7 +458,7 @@ class _HomePageState extends State<HomePage> {
             width: 60,
             height: 5,
             decoration: BoxDecoration(
-              color: Color(0xFFD0AD67),
+              color: const Color(0xFFD0AD67),
               borderRadius: BorderRadius.circular(5.0),
             ),
             child: FractionallySizedBox(
@@ -493,7 +466,7 @@ class _HomePageState extends State<HomePage> {
               widthFactor: progressValue,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Color(0xFFF57C00),
+                  color: const Color(0xFFF57C00),
                   borderRadius: BorderRadius.circular(5.0),
                 ),
               ),
@@ -512,7 +485,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           Icon(
             icon,
-            color: _selectedIndex == index ? Color(0xFFFFC107) : Color(0xFF00796B),
+            color: _selectedIndex == index ? const Color(0xFFFFC107) : const Color(0xFF00796B),
             size: 35,
           ),
         ],

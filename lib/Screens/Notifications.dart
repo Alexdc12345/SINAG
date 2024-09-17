@@ -18,22 +18,22 @@ class _NotificationsPageState extends State<NotificationsPage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(); // Go back to the previous screen
           },
         ),
-        title: Align(
-          alignment: Alignment.center,
-          child: Container(
-            constraints: BoxConstraints(
-              maxWidth: 200, // Adjust the maxWidth as needed
-            ),
+        title: Text(
+          'Notifications',
+          style: TextStyle(
+            color: Color.fromARGB(255, 0, 0, 0),
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [],
+        centerTitle: true, // Center the title in the AppBar
       ),
       body: Center(
         child: Text(
-          'No notifications yet.',
+          'No notification yet.',
           style: TextStyle(
             fontSize: 24,
             color: Colors.black,
