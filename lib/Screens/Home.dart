@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:sinag/Screens/Recommendation.dart';
+import 'package:sinag/Screens/Notifications.dart';
+import 'package:sinag/Screens/Chatbot.dart';
 import 'dart:math';
 
 class HomePage extends StatefulWidget {
@@ -102,28 +104,31 @@ class _HomePageState extends State<HomePage> {
 
   void _onButtonPressed() {
     print('Home button pressed!');
-    Navigator.pushReplacement(
+    Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => HomePage()),
+      MaterialPageRoute(builder: (context) => const HomePage()),
     );    
   }
-    void _onNotificationButtonPressed() {
+
+  void _onChatbotButtonPressed() {
+    print("Chatbot button pressed"); // Debugging line
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ChatbotPage()),
+    );
+  }
+
+  void _onNotificationButtonPressed() {
     print('Notification button pressed!');
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => NotificationsPage()),
+    );    
   }
 
   void _onMenuButtonPressed() {
     print('Hamburger menu button pressed!');
   }
-
-void _onChatbotButtonPressed() {
-  print("Chatbot button pressed"); // Debugging line
-  _showHelpDialog(context);
-
-  // Existing logic for chatbot button press
-  // For example: Navigator.push(...); or other actions
-}
-
-
 
   void _showHelpDialog(BuildContext context) {
     showDialog(
@@ -171,7 +176,7 @@ void _onChatbotButtonPressed() {
           ],
         ),
         centerTitle: true,
-                leading: Padding(
+        leading: Padding(
           padding: const EdgeInsets.only(left: 16.0),
           child: GestureDetector(
             onTap: _onMenuButtonPressed,
@@ -358,7 +363,7 @@ void _onChatbotButtonPressed() {
           ],
         ),
       ),
-      
+
       bottomNavigationBar: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -375,7 +380,7 @@ void _onChatbotButtonPressed() {
                 _buildNavItem(Icons.person, 'Profile', 3),
               ],
             ),
-          ),
+          ),          
           Positioned(
             bottom: 22,
             left: MediaQuery.of(context).size.width / 2 - 37.5,
@@ -429,10 +434,9 @@ void _onChatbotButtonPressed() {
                 ),
               ),
             ),
-          ),
+          ),          
         ],
       ),
-
     );
   }
 
