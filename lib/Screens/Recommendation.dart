@@ -127,6 +127,10 @@ class _RecommendationPageState extends State<RecommendationPage> {
 
   void _onButtonPressed() {
     print('Home button pressed!');
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage()),
+    );
   }
 
   void _onNotificationButtonPressed() {
@@ -797,7 +801,63 @@ class _RecommendationPageState extends State<RecommendationPage> {
                 ],
               ),
             ),
-          ),                    
+          ),
+          Padding(
+              padding: const EdgeInsets.only(top: 15.0), // Adjust the value as needed
+              child: Container(
+                height: 40,
+                width: 365,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFC107),
+                  borderRadius: BorderRadius.circular(5.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: Text(
+                    'Return of Investment (ROI)',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ),
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 20), // Add some spacing between the boxes
+                  Container(
+                    height: 190, // Placeholder height, adjust as needed
+                    width: 365, // Placeholder width, adjust as needed
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300], // Placeholder color
+                      borderRadius: BorderRadius.circular(5.0),
+                      border: Border.all(color: Colors.grey), // Optional border
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Placeholder Box for Graph',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Add more widgets as needed here
+                ],
+              ),
+            ),                                         
           Expanded(
             child: Center(
               child: Container(

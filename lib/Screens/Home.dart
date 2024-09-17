@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:sinag/Screens/Recommendation.dart';
-
+import 'dart:math';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -102,6 +102,10 @@ class _HomePageState extends State<HomePage> {
 
   void _onButtonPressed() {
     print('Home button pressed!');
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage()),
+    );    
   }
     void _onNotificationButtonPressed() {
     print('Notification button pressed!');
@@ -109,6 +113,36 @@ class _HomePageState extends State<HomePage> {
 
   void _onMenuButtonPressed() {
     print('Hamburger menu button pressed!');
+  }
+
+void _onChatbotButtonPressed() {
+  print("Chatbot button pressed"); // Debugging line
+  _showHelpDialog(context);
+
+  // Existing logic for chatbot button press
+  // For example: Navigator.push(...); or other actions
+}
+
+
+
+  void _showHelpDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Help'),
+          content: Text('Having trouble? Ask SINAGbot!'),
+          actions: [
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -353,7 +387,7 @@ class _HomePageState extends State<HomePage> {
                 height: 75,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color(0xFFFFC107),
+                  color: Color.fromARGB(255, 255, 193, 7), // Adjusted transparency
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.3),
@@ -369,8 +403,36 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+          Positioned(
+            bottom: 85,
+            right: 25,
+            child: InkWell(
+              onTap: _onChatbotButtonPressed,
+              borderRadius: BorderRadius.circular(30),
+              child: Container(
+                width: 65,
+                height: 65,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color.fromARGB(72, 255, 193, 7), // Adjusted transparency
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.05),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: Image.asset('assets/palm.png', width: 40, height: 40), // Replace with your image
+                ),
+              ),
+            ),
+          ),
         ],
       ),
+
     );
   }
 
